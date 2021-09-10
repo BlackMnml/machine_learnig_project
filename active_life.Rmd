@@ -1,7 +1,22 @@
 ---
-title: "R Notebook"
+title: "Active Life"
 output: html_notebook
 ---
+
+Business understanding
+
+Data understanding 
+
+Data preparation
+
+Modeling
+
+Evaluation
+
+Development 
+
+
+
 
 ## Cargar Librerias
 
