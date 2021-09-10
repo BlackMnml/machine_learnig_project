@@ -3,31 +3,21 @@ title: "Active Life"
 output: html_notebook
 ---
 
-Business understanding
+## Business understanding
 
-Data understanding 
+## Data understanding 
 
-Data preparation
+## Data preparation
 
-Modeling
-
-Evaluation
-
-Development 
-
-
-
-
-## Cargar Librerias
+#### - Cargar Librerias
 
 ```{r}
-
 library(dummies)
 library (zoo)
 library (hydroGOF)
 
 ```
-## Cargar datos de entrenamiento con el 80% del total de muestra 
+#### - Cargar datos de entrenamiento con el 80% del total de muestra 
 ```{r}
 getwd()
 
@@ -36,22 +26,22 @@ setwd('C:/Users/cristian_bedoya/Documents/Estudio/Aprendizaje Maquinas/Taller Fi
 dataCheckingTraining = read.csv("Datos/Business_ActiveLife_Training.csv",sep="," , header = TRUE)
 
 ```
-# Se realiza la transformación de dias de la semana para validar si es fin de semana y se elimina la variable de dia
+#### - Se realiza la transformación de dias de la semana para validar si es fin de semana y se elimina la variable de dia
 ```{r}
 
 dataCheckingTraining$week_day <- as.factor(dataCheckingTraining$week_day) 
 
 dataCheckingTraining$weekend <- ifelse(dataCheckingTraining$week_day == "Sat" | dataCheckingTraining$week_day == "Sun" | dataCheckingTraining$week_day == "Fri", 1, 0)
-
 dataCheckingTraining = dataCheckingTraining[ , -c(2)]
 
 ```
-# Se muestra la correlacion
+#### - Se muestra la correlacion
 ```{r}
-
 df= data.frame(cor(dataCheckingTraining))
-
 ```
+
+# Modeling
+
 # Se realiza la regresión multiple
 ```{r}
 
@@ -90,6 +80,8 @@ df_predicciones<-data.frame(predicciones)
 df_predicciones$real<-(dataCheckingTest$checkins)
 
 ```
+# Evaluation
+
 # Se grafica prediciones vs real
 ```{r}
 # Graficar predicciones vs real
@@ -98,6 +90,7 @@ plot(df_predicciones$predicciones, df_predicciones$real, xlab="Prediccion", ylab
 
 
 ```
+
 # se obtienen los resultados del MAE y el RMSE
 ```{r}
 p <- predicciones                  
@@ -108,3 +101,4 @@ View(mae_R)
 View(rmse_R)
 ```
 
+# Development 

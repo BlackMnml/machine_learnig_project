@@ -215,19 +215,20 @@ pre code {
 
 
 <!-- rnb-text-begin -->
-<p>Business understanding</p>
-<p>Data understanding</p>
-<p>Data preparation</p>
-<p>Modeling</p>
-<p>Evaluation</p>
-<p>Development</p>
-<div id="cargar-librerias" class="section level2">
-<h2>Cargar Librerias</h2>
+<div id="business-understanding" class="section level2">
+<h2>Business understanding</h2>
+</div>
+<div id="data-understanding" class="section level2">
+<h2>Data understanding</h2>
+</div>
+<div id="data-preparation" class="section level2">
+<h2>Data preparation</h2>
+<div id="cargar-librerias" class="section level4">
+<h4>- Cargar Librerias</h4>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG5saWJyYXJ5KGR1bW1pZXMpXG5saWJyYXJ5ICh6b28pXG5saWJyYXJ5IChoeWRyb0dPRilcblxuYGBgIn0= -->
-<pre class="r"><code>
-library(dummies)
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShkdW1taWVzKVxubGlicmFyeSAoem9vKVxubGlicmFyeSAoaHlkcm9HT0YpXG5cbmBgYCJ9 -->
+<pre class="r"><code>library(dummies)
 library (zoo)
 library (hydroGOF)
 </code></pre>
@@ -235,8 +236,8 @@ library (hydroGOF)
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
-<div id="cargar-datos-de-entrenamiento-con-el-80-del-total-de-muestra" class="section level2">
-<h2>Cargar datos de entrenamiento con el 80% del total de muestra</h2>
+<div id="cargar-datos-de-entrenamiento-con-el-80-del-total-de-muestra" class="section level4">
+<h4>- Cargar datos de entrenamiento con el 80% del total de muestra</h4>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZ2V0d2QoKVxuXG5zZXR3ZCgnQzovVXNlcnMvY3Jpc3RpYW5fYmVkb3lhL0RvY3VtZW50cy9Fc3R1ZGlvL0FwcmVuZGl6YWplIE1hcXVpbmFzL1RhbGxlciBGaW5hbC9Qcm95ZWN0b1InKVxuXG5kYXRhQ2hlY2tpbmdUcmFpbmluZyA9IHJlYWQuY3N2KFwiRGF0b3MvQnVzaW5lc3NfQWN0aXZlTGlmZV9UcmFpbmluZy5jc3ZcIixzZXA9XCIsXCIgLCBoZWFkZXIgPSBUUlVFKVxuXG5gYGAifQ== -->
@@ -250,33 +251,34 @@ dataCheckingTraining = read.csv(&quot;Datos/Business_ActiveLife_Training.csv&quo
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
-<div id="se-realiza-la-transformación-de-dias-de-la-semana-para-validar-si-es-fin-de-semana-y-se-elimina-la-variable-de-dia" class="section level1">
-<h1>Se realiza la transformación de dias de la semana para validar si es fin de semana y se elimina la variable de dia</h1>
+<div id="se-realiza-la-transformación-de-dias-de-la-semana-para-validar-si-es-fin-de-semana-y-se-elimina-la-variable-de-dia" class="section level4">
+<h4>- Se realiza la transformación de dias de la semana para validar si es fin de semana y se elimina la variable de dia</h4>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG5kYXRhQ2hlY2tpbmdUcmFpbmluZyR3ZWVrX2RheSA8LSBhcy5mYWN0b3IoZGF0YUNoZWNraW5nVHJhaW5pbmckd2Vla19kYXkpIFxuXG5kYXRhQ2hlY2tpbmdUcmFpbmluZyR3ZWVrZW5kIDwtIGlmZWxzZShkYXRhQ2hlY2tpbmdUcmFpbmluZyR3ZWVrX2RheSA9PSBcIlNhdFwiIHwgZGF0YUNoZWNraW5nVHJhaW5pbmckd2Vla19kYXkgPT0gXCJTdW5cIiB8IGRhdGFDaGVja2luZ1RyYWluaW5nJHdlZWtfZGF5ID09IFwiRnJpXCIsIDEsIDApXG5cbmRhdGFDaGVja2luZ1RyYWluaW5nID0gZGF0YUNoZWNraW5nVHJhaW5pbmdbICwgLWMoMildXG5cbmBgYCJ9 -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG5kYXRhQ2hlY2tpbmdUcmFpbmluZyR3ZWVrX2RheSA8LSBhcy5mYWN0b3IoZGF0YUNoZWNraW5nVHJhaW5pbmckd2Vla19kYXkpIFxuXG5kYXRhQ2hlY2tpbmdUcmFpbmluZyR3ZWVrZW5kIDwtIGlmZWxzZShkYXRhQ2hlY2tpbmdUcmFpbmluZyR3ZWVrX2RheSA9PSBcIlNhdFwiIHwgZGF0YUNoZWNraW5nVHJhaW5pbmckd2Vla19kYXkgPT0gXCJTdW5cIiB8IGRhdGFDaGVja2luZ1RyYWluaW5nJHdlZWtfZGF5ID09IFwiRnJpXCIsIDEsIDApXG5kYXRhQ2hlY2tpbmdUcmFpbmluZyA9IGRhdGFDaGVja2luZ1RyYWluaW5nWyAsIC1jKDIpXVxuXG5gYGAifQ== -->
 <pre class="r"><code>
 dataCheckingTraining$week_day &lt;- as.factor(dataCheckingTraining$week_day) 
 
 dataCheckingTraining$weekend &lt;- ifelse(dataCheckingTraining$week_day == &quot;Sat&quot; | dataCheckingTraining$week_day == &quot;Sun&quot; | dataCheckingTraining$week_day == &quot;Fri&quot;, 1, 0)
-
 dataCheckingTraining = dataCheckingTraining[ , -c(2)]
 </code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
-<div id="se-muestra-la-correlacion" class="section level1">
-<h1>Se muestra la correlacion</h1>
+<div id="se-muestra-la-correlacion" class="section level4">
+<h4>- Se muestra la correlacion</h4>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG5kZj0gZGF0YS5mcmFtZShjb3IoZGF0YUNoZWNraW5nVHJhaW5pbmcpKVxuXG5gYGAifQ== -->
-<pre class="r"><code>
-df= data.frame(cor(dataCheckingTraining))
-</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZGY9IGRhdGEuZnJhbWUoY29yKGRhdGFDaGVja2luZ1RyYWluaW5nKSlcbmBgYCJ9 -->
+<pre class="r"><code>df= data.frame(cor(dataCheckingTraining))</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
+</div>
+</div>
+<div id="modeling" class="section level1">
+<h1>Modeling</h1>
 </div>
 <div id="se-realiza-la-regresión-multiple" class="section level1">
 <h1>Se realiza la regresión multiple</h1>
@@ -340,6 +342,9 @@ df_predicciones$real&lt;-(dataCheckingTest$checkins)
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
+<div id="evaluation" class="section level1">
+<h1>Evaluation</h1>
+</div>
 <div id="se-grafica-prediciones-vs-real" class="section level1">
 <h1>Se grafica prediciones vs real</h1>
 <!-- rnb-text-end -->
@@ -367,10 +372,13 @@ View(rmse_R)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
+</div>
+<div id="development" class="section level1">
+<h1>Development</h1>
 <!-- rnb-text-end -->
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiQWN0aXZlIExpZmUiCm91dHB1dDogaHRtbF9ub3RlYm9vawotLS0KCkJ1c2luZXNzIHVuZGVyc3RhbmRpbmcKCkRhdGEgdW5kZXJzdGFuZGluZyAKCkRhdGEgcHJlcGFyYXRpb24KCk1vZGVsaW5nCgpFdmFsdWF0aW9uCgpEZXZlbG9wbWVudCAKCgoKCiMjIENhcmdhciBMaWJyZXJpYXMKCmBgYHtyfQoKbGlicmFyeShkdW1taWVzKQpsaWJyYXJ5ICh6b28pCmxpYnJhcnkgKGh5ZHJvR09GKQoKYGBgCiMjIENhcmdhciBkYXRvcyBkZSBlbnRyZW5hbWllbnRvIGNvbiBlbCA4MCUgZGVsIHRvdGFsIGRlIG11ZXN0cmEgCmBgYHtyfQpnZXR3ZCgpCgpzZXR3ZCgnQzovVXNlcnMvY3Jpc3RpYW5fYmVkb3lhL0RvY3VtZW50cy9Fc3R1ZGlvL0FwcmVuZGl6YWplIE1hcXVpbmFzL1RhbGxlciBGaW5hbC9Qcm95ZWN0b1InKQoKZGF0YUNoZWNraW5nVHJhaW5pbmcgPSByZWFkLmNzdigiRGF0b3MvQnVzaW5lc3NfQWN0aXZlTGlmZV9UcmFpbmluZy5jc3YiLHNlcD0iLCIgLCBoZWFkZXIgPSBUUlVFKQoKYGBgCiMgU2UgcmVhbGl6YSBsYSB0cmFuc2Zvcm1hY2nDs24gZGUgZGlhcyBkZSBsYSBzZW1hbmEgcGFyYSB2YWxpZGFyIHNpIGVzIGZpbiBkZSBzZW1hbmEgeSBzZSBlbGltaW5hIGxhIHZhcmlhYmxlIGRlIGRpYQpgYGB7cn0KCmRhdGFDaGVja2luZ1RyYWluaW5nJHdlZWtfZGF5IDwtIGFzLmZhY3RvcihkYXRhQ2hlY2tpbmdUcmFpbmluZyR3ZWVrX2RheSkgCgpkYXRhQ2hlY2tpbmdUcmFpbmluZyR3ZWVrZW5kIDwtIGlmZWxzZShkYXRhQ2hlY2tpbmdUcmFpbmluZyR3ZWVrX2RheSA9PSAiU2F0IiB8IGRhdGFDaGVja2luZ1RyYWluaW5nJHdlZWtfZGF5ID09ICJTdW4iIHwgZGF0YUNoZWNraW5nVHJhaW5pbmckd2Vla19kYXkgPT0gIkZyaSIsIDEsIDApCgpkYXRhQ2hlY2tpbmdUcmFpbmluZyA9IGRhdGFDaGVja2luZ1RyYWluaW5nWyAsIC1jKDIpXQoKYGBgCiMgU2UgbXVlc3RyYSBsYSBjb3JyZWxhY2lvbgpgYGB7cn0KCmRmPSBkYXRhLmZyYW1lKGNvcihkYXRhQ2hlY2tpbmdUcmFpbmluZykpCgpgYGAKIyBTZSByZWFsaXphIGxhIHJlZ3Jlc2nDs24gbXVsdGlwbGUKYGBge3J9CgpNb2RlbG9fUmVncmVzaW9uTGluZWFsID0gbG0oY2hlY2tpbnMgfiAuLCBkYXRhPWRhdGFDaGVja2luZ1RyYWluaW5nKQoKc3VtbWFyeShNb2RlbG9fUmVncmVzaW9uTGluZWFsKQoKY29lZmY9IGNvZWYoTW9kZWxvX1JlZ3Jlc2lvbkxpbmVhbCkKY29lZmYKCmBgYAojIENhcmdhciBkYXRvcyBkZSBwcnVlYmFzCmBgYHtyfQoKZGF0YUNoZWNraW5nVGVzdCA9IHJlYWQuY3N2KCJEYXRvcy9CdXNpbmVzc19BY3RpdmVMaWZlX1Rlc3QuY3N2IiwgaGVhZGVyID0gVFJVRSwgc2VwID0gIiwiKQoKYGBgCiMgU2UgcmVhbGl6YSBsYSB0cmFuc2Zvcm1hY2nDs24gZGUgZGlhcyBkZSBsYSBzZW1hbmEgcGFyYSB2YWxpZGFyIHNpIGVzIGZpbiBkZSBzZW1hbmEgeSBzZSBlbGltaW5hIGxhIHZhcmlhYmxlIGRlIGRpYQpgYGB7cn0KCmRhdGFDaGVja2luZ1Rlc3Qkd2Vla19kYXkgPC0gYXMuZmFjdG9yKGRhdGFDaGVja2luZ1Rlc3Qkd2Vla19kYXkpIAoKZGF0YUNoZWNraW5nVGVzdCR3ZWVrZW5kIDwtIGlmZWxzZShkYXRhQ2hlY2tpbmdUZXN0JHdlZWtfZGF5ID09ICJTYXQiIHwgZGF0YUNoZWNraW5nVGVzdCR3ZWVrX2RheSA9PSAiU3VuIiB8IGRhdGFDaGVja2luZ1Rlc3Qkd2Vla19kYXkgPT0gIkZyaSIsIDEsIDApCgpkYXRhQ2hlY2tpbmdUZXN0ID0gZGF0YUNoZWNraW5nVGVzdFsgLCAtYygyKV0KCmBgYAojIFNlIHJlYWxpemEgbGFzIHByZWRpY2Npb25lcwpgYGB7cn0KCnByZWRpY2Npb25lczwtcHJlZGljdChNb2RlbG9fUmVncmVzaW9uTGluZWFsLCBkYXRhQ2hlY2tpbmdUZXN0KQoKZGZfcHJlZGljY2lvbmVzPC1kYXRhLmZyYW1lKHByZWRpY2Npb25lcykKCiMgQWdyZWdhciBsYSBjb2x1bW5hIGRlIGxvcyBjcmltZW5lcyByZWFsZXMgYWwgZGF0YSBmcmFtZSBkZSBsYXMgcHJlZGljY2lvbmVzIApkZl9wcmVkaWNjaW9uZXMkcmVhbDwtKGRhdGFDaGVja2luZ1Rlc3QkY2hlY2tpbnMpCgpgYGAKIyBTZSBncmFmaWNhIHByZWRpY2lvbmVzIHZzIHJlYWwKYGBge3J9CiMgR3JhZmljYXIgcHJlZGljY2lvbmVzIHZzIHJlYWwKCnBsb3QoZGZfcHJlZGljY2lvbmVzJHByZWRpY2Npb25lcywgZGZfcHJlZGljY2lvbmVzJHJlYWwsIHhsYWI9IlByZWRpY2Npb24iLCB5bGFiPSIgUmVhbCIsIGNvbD0iQmx1ZSIpICsgYWJsaW5lKDEsMSwgY29sPSJncmVlbiIpCgoKYGBgCiMgc2Ugb2J0aWVuZW4gbG9zIHJlc3VsdGFkb3MgZGVsIE1BRSB5IGVsIFJNU0UKYGBge3J9CnAgPC0gcHJlZGljY2lvbmVzICAgICAgICAgICAgICAgICAgCmEgPC0gZGF0YUNoZWNraW5nVGVzdCRjaGVja2lucyAKbWFlX1IgPC0gbWFlIChwLCBhKQpybXNlX1IgPC0gcm1zZSAocCwgYSkKVmlldyhtYWVfUikKVmlldyhybXNlX1IpCmBgYAoK</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiQWN0aXZlIExpZmUiCm91dHB1dDogaHRtbF9ub3RlYm9vawotLS0KCiMjIEJ1c2luZXNzIHVuZGVyc3RhbmRpbmcKCiMjIERhdGEgdW5kZXJzdGFuZGluZyAKCiMjIERhdGEgcHJlcGFyYXRpb24KCiMjIyMgLSBDYXJnYXIgTGlicmVyaWFzCgpgYGB7cn0KbGlicmFyeShkdW1taWVzKQpsaWJyYXJ5ICh6b28pCmxpYnJhcnkgKGh5ZHJvR09GKQoKYGBgCiMjIyMgLSBDYXJnYXIgZGF0b3MgZGUgZW50cmVuYW1pZW50byBjb24gZWwgODAlIGRlbCB0b3RhbCBkZSBtdWVzdHJhIApgYGB7cn0KZ2V0d2QoKQoKc2V0d2QoJ0M6L1VzZXJzL2NyaXN0aWFuX2JlZG95YS9Eb2N1bWVudHMvRXN0dWRpby9BcHJlbmRpemFqZSBNYXF1aW5hcy9UYWxsZXIgRmluYWwvUHJveWVjdG9SJykKCmRhdGFDaGVja2luZ1RyYWluaW5nID0gcmVhZC5jc3YoIkRhdG9zL0J1c2luZXNzX0FjdGl2ZUxpZmVfVHJhaW5pbmcuY3N2IixzZXA9IiwiICwgaGVhZGVyID0gVFJVRSkKCmBgYAojIyMjIC0gU2UgcmVhbGl6YSBsYSB0cmFuc2Zvcm1hY2nDs24gZGUgZGlhcyBkZSBsYSBzZW1hbmEgcGFyYSB2YWxpZGFyIHNpIGVzIGZpbiBkZSBzZW1hbmEgeSBzZSBlbGltaW5hIGxhIHZhcmlhYmxlIGRlIGRpYQpgYGB7cn0KCmRhdGFDaGVja2luZ1RyYWluaW5nJHdlZWtfZGF5IDwtIGFzLmZhY3RvcihkYXRhQ2hlY2tpbmdUcmFpbmluZyR3ZWVrX2RheSkgCgpkYXRhQ2hlY2tpbmdUcmFpbmluZyR3ZWVrZW5kIDwtIGlmZWxzZShkYXRhQ2hlY2tpbmdUcmFpbmluZyR3ZWVrX2RheSA9PSAiU2F0IiB8IGRhdGFDaGVja2luZ1RyYWluaW5nJHdlZWtfZGF5ID09ICJTdW4iIHwgZGF0YUNoZWNraW5nVHJhaW5pbmckd2Vla19kYXkgPT0gIkZyaSIsIDEsIDApCmRhdGFDaGVja2luZ1RyYWluaW5nID0gZGF0YUNoZWNraW5nVHJhaW5pbmdbICwgLWMoMildCgpgYGAKIyMjIyAtIFNlIG11ZXN0cmEgbGEgY29ycmVsYWNpb24KYGBge3J9CmRmPSBkYXRhLmZyYW1lKGNvcihkYXRhQ2hlY2tpbmdUcmFpbmluZykpCmBgYAoKIyBNb2RlbGluZwoKIyBTZSByZWFsaXphIGxhIHJlZ3Jlc2nDs24gbXVsdGlwbGUKYGBge3J9CgpNb2RlbG9fUmVncmVzaW9uTGluZWFsID0gbG0oY2hlY2tpbnMgfiAuLCBkYXRhPWRhdGFDaGVja2luZ1RyYWluaW5nKQoKc3VtbWFyeShNb2RlbG9fUmVncmVzaW9uTGluZWFsKQoKY29lZmY9IGNvZWYoTW9kZWxvX1JlZ3Jlc2lvbkxpbmVhbCkKY29lZmYKCmBgYAojIENhcmdhciBkYXRvcyBkZSBwcnVlYmFzCmBgYHtyfQoKZGF0YUNoZWNraW5nVGVzdCA9IHJlYWQuY3N2KCJEYXRvcy9CdXNpbmVzc19BY3RpdmVMaWZlX1Rlc3QuY3N2IiwgaGVhZGVyID0gVFJVRSwgc2VwID0gIiwiKQoKYGBgCiMgU2UgcmVhbGl6YSBsYSB0cmFuc2Zvcm1hY2nDs24gZGUgZGlhcyBkZSBsYSBzZW1hbmEgcGFyYSB2YWxpZGFyIHNpIGVzIGZpbiBkZSBzZW1hbmEgeSBzZSBlbGltaW5hIGxhIHZhcmlhYmxlIGRlIGRpYQpgYGB7cn0KCmRhdGFDaGVja2luZ1Rlc3Qkd2Vla19kYXkgPC0gYXMuZmFjdG9yKGRhdGFDaGVja2luZ1Rlc3Qkd2Vla19kYXkpIAoKZGF0YUNoZWNraW5nVGVzdCR3ZWVrZW5kIDwtIGlmZWxzZShkYXRhQ2hlY2tpbmdUZXN0JHdlZWtfZGF5ID09ICJTYXQiIHwgZGF0YUNoZWNraW5nVGVzdCR3ZWVrX2RheSA9PSAiU3VuIiB8IGRhdGFDaGVja2luZ1Rlc3Qkd2Vla19kYXkgPT0gIkZyaSIsIDEsIDApCgpkYXRhQ2hlY2tpbmdUZXN0ID0gZGF0YUNoZWNraW5nVGVzdFsgLCAtYygyKV0KCmBgYAojIFNlIHJlYWxpemEgbGFzIHByZWRpY2Npb25lcwpgYGB7cn0KCnByZWRpY2Npb25lczwtcHJlZGljdChNb2RlbG9fUmVncmVzaW9uTGluZWFsLCBkYXRhQ2hlY2tpbmdUZXN0KQoKZGZfcHJlZGljY2lvbmVzPC1kYXRhLmZyYW1lKHByZWRpY2Npb25lcykKCiMgQWdyZWdhciBsYSBjb2x1bW5hIGRlIGxvcyBjcmltZW5lcyByZWFsZXMgYWwgZGF0YSBmcmFtZSBkZSBsYXMgcHJlZGljY2lvbmVzIApkZl9wcmVkaWNjaW9uZXMkcmVhbDwtKGRhdGFDaGVja2luZ1Rlc3QkY2hlY2tpbnMpCgpgYGAKIyBFdmFsdWF0aW9uCgojIFNlIGdyYWZpY2EgcHJlZGljaW9uZXMgdnMgcmVhbApgYGB7cn0KIyBHcmFmaWNhciBwcmVkaWNjaW9uZXMgdnMgcmVhbAoKcGxvdChkZl9wcmVkaWNjaW9uZXMkcHJlZGljY2lvbmVzLCBkZl9wcmVkaWNjaW9uZXMkcmVhbCwgeGxhYj0iUHJlZGljY2lvbiIsIHlsYWI9IiBSZWFsIiwgY29sPSJCbHVlIikgKyBhYmxpbmUoMSwxLCBjb2w9ImdyZWVuIikKCgpgYGAKCiMgc2Ugb2J0aWVuZW4gbG9zIHJlc3VsdGFkb3MgZGVsIE1BRSB5IGVsIFJNU0UKYGBge3J9CnAgPC0gcHJlZGljY2lvbmVzICAgICAgICAgICAgICAgICAgCmEgPC0gZGF0YUNoZWNraW5nVGVzdCRjaGVja2lucyAKbWFlX1IgPC0gbWFlIChwLCBhKQpybXNlX1IgPC0gcm1zZSAocCwgYSkKVmlldyhtYWVfUikKVmlldyhybXNlX1IpCmBgYAoKIyBEZXZlbG9wbWVudCAK</div>
 
 
 

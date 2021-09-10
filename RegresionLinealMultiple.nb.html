@@ -219,80 +219,37 @@ pre code {
 <h2>Cargar Librerias</h2>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxuXG5saWJyYXJ5KGR1bW1pZXMpXG5saWJyYXJ5ICh6b28pXG5gYGBcbmBgYCJ9 -->
-<pre class="r"><code>```r
-
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG5saWJyYXJ5KGR1bW1pZXMpXG5saWJyYXJ5ICh6b28pXG5saWJyYXJ5IChoeWRyb0dPRilcblxuYGBgIn0= -->
+<pre class="r"><code>
 library(dummies)
-library (zoo)</code></pre>
-<pre><code>
-&lt;!-- rnb-source-end --&gt;
-
-&lt;!-- rnb-output-begin eyJkYXRhIjoiXG5BdHRhY2hpbmcgcGFja2FnZTog4oCYem9v4oCZXG5cblRoZSBmb2xsb3dpbmcgb2JqZWN0cyBhcmUgbWFza2VkIGZyb20g4oCYcGFja2FnZTpiYXNl4oCZOlxuXG4gICAgYXMuRGF0ZSwgYXMuRGF0ZS5udW1lcmljXG4ifQ== --&gt;
-</code></pre>
-<p>Attaching package: ‘zoo’</p>
-<p>The following objects are masked from ‘package:base’:</p>
-<pre><code>as.Date, as.Date.numeric</code></pre>
-<pre><code>
-
-
-&lt;!-- rnb-output-end --&gt;
-
-&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxubGlicmFyeSAoaHlkcm9HT0YpXG5cbmBgYFxuYGBgIn0= --&gt;
-
-```r
-```r
+library (zoo)
 library (hydroGOF)
 </code></pre>
-<pre><code>
-&lt;!-- rnb-source-end --&gt;
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
+<div id="cargar-datos-de-entrenamiento-con-el-80-del-total-de-muestra" class="section level2">
+<h2>Cargar datos de entrenamiento con el 80% del total de muestra</h2>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZ2V0d2QoKVxuXG5zZXR3ZCgnQzovVXNlcnMvY3Jpc3RpYW5fYmVkb3lhL0RvY3VtZW50cy9Fc3R1ZGlvL0FwcmVuZGl6YWplIE1hcXVpbmFzL1RhbGxlciBGaW5hbC9Qcm95ZWN0b1InKVxuXG5kYXRhQ2hlY2tpbmdUcmFpbmluZyA9IHJlYWQuY3N2KFwiRGF0b3MvQnVzaW5lc3NfQWN0aXZlTGlmZV9UcmFpbmluZy5jc3ZcIixzZXA9XCIsXCIgLCBoZWFkZXIgPSBUUlVFKVxuXG5gYGAifQ== -->
+<pre class="r"><code>getwd()
 
-&lt;!-- rnb-chunk-end --&gt;
+setwd(&#39;C:/Users/cristian_bedoya/Documents/Estudio/Aprendizaje Maquinas/Taller Final/ProyectoR&#39;)
 
-
-&lt;!-- rnb-text-begin --&gt;
-
-## Cargar datos de entrenamiento con el 80% del total de muestra 
-
-&lt;!-- rnb-text-end --&gt;
-
-
-&lt;!-- rnb-chunk-begin --&gt;
-
-
-&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxuYGBge3J9XG5cbmBgYFxuYGBgIn0= --&gt;
-
-```r
-```r
-```{r}
+dataCheckingTraining = read.csv(&quot;Datos/Business_ActiveLife_Training.csv&quot;,sep=&quot;,&quot; , header = TRUE)
 </code></pre>
-<pre><code>
-&lt;!-- rnb-source-end --&gt;
-
-&lt;!-- rnb-output-begin eyJkYXRhIjoiRXJyb3I6IGF0dGVtcHQgdG8gdXNlIHplcm8tbGVuZ3RoIHZhcmlhYmxlIG5hbWVcbiJ9 --&gt;
-</code></pre>
-<p>Error: attempt to use zero-length variable name</p>
-<pre><code>
-
-
-&lt;!-- rnb-output-end --&gt;
-
-&lt;!-- rnb-chunk-end --&gt;
-
-
-&lt;!-- rnb-text-begin --&gt;
-
-# Se realiza la transformación de dias de la semana para validar si es fin de semana y se elimina la variable de dia
-
-&lt;!-- rnb-text-end --&gt;
-
-
-&lt;!-- rnb-chunk-begin --&gt;
-
-
-&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG5kYXRhQ2hlY2tpbmdUcmFpbmluZyR3ZWVrX2RheSA8LSBhcy5mYWN0b3IoZGF0YUNoZWNraW5nVHJhaW5pbmckd2Vla19kYXkpIFxuXG5kYXRhQ2hlY2tpbmdUcmFpbmluZyR3ZWVrZW5kIDwtIGlmZWxzZShkYXRhQ2hlY2tpbmdUcmFpbmluZyR3ZWVrX2RheSA9PSBcIlNhdFwiIHwgZGF0YUNoZWNraW5nVHJhaW5pbmckd2Vla19kYXkgPT0gXCJTdW5cIiB8IGRhdGFDaGVja2luZ1RyYWluaW5nJHdlZWtfZGF5ID09IFwiRnJpXCIsIDEsIDApXG5cbmRhdGFDaGVja2luZ1RyYWluaW5nID0gZGF0YUNoZWNraW5nVHJhaW5pbmdbICwgLWMoMildXG5cbmBgYCJ9 --&gt;
-
-```r
-
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
+<div id="se-realiza-la-transformación-de-dias-de-la-semana-para-validar-si-es-fin-de-semana-y-se-elimina-la-variable-de-dia" class="section level1">
+<h1>Se realiza la transformación de dias de la semana para validar si es fin de semana y se elimina la variable de dia</h1>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG5kYXRhQ2hlY2tpbmdUcmFpbmluZyR3ZWVrX2RheSA8LSBhcy5mYWN0b3IoZGF0YUNoZWNraW5nVHJhaW5pbmckd2Vla19kYXkpIFxuXG5kYXRhQ2hlY2tpbmdUcmFpbmluZyR3ZWVrZW5kIDwtIGlmZWxzZShkYXRhQ2hlY2tpbmdUcmFpbmluZyR3ZWVrX2RheSA9PSBcIlNhdFwiIHwgZGF0YUNoZWNraW5nVHJhaW5pbmckd2Vla19kYXkgPT0gXCJTdW5cIiB8IGRhdGFDaGVja2luZ1RyYWluaW5nJHdlZWtfZGF5ID09IFwiRnJpXCIsIDEsIDApXG5cbmRhdGFDaGVja2luZ1RyYWluaW5nID0gZGF0YUNoZWNraW5nVHJhaW5pbmdbICwgLWMoMildXG5cbmBgYCJ9 -->
+<pre class="r"><code>
 dataCheckingTraining$week_day &lt;- as.factor(dataCheckingTraining$week_day) 
 
 dataCheckingTraining$weekend &lt;- ifelse(dataCheckingTraining$week_day == &quot;Sat&quot; | dataCheckingTraining$week_day == &quot;Sun&quot; | dataCheckingTraining$week_day == &quot;Fri&quot;, 1, 0)
@@ -307,76 +264,44 @@ dataCheckingTraining = dataCheckingTraining[ , -c(2)]
 <h1>Se muestra la correlacion</h1>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxudmlldyhkZilcblxuYGBgXG5gYGAifQ== -->
-<pre class="r"><code>```r
-view(df)
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG5kZj0gZGF0YS5mcmFtZShjb3IoZGF0YUNoZWNraW5nVHJhaW5pbmcpKVxuXG5gYGAifQ== -->
+<pre class="r"><code>
+df= data.frame(cor(dataCheckingTraining))
 </code></pre>
-<pre><code>
-&lt;!-- rnb-source-end --&gt;
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
+<div id="se-realiza-la-regresión-multiple" class="section level1">
+<h1>Se realiza la regresión multiple</h1>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG5Nb2RlbG9fUmVncmVzaW9uTGluZWFsID0gbG0oY2hlY2tpbnMgfiAuLCBkYXRhPWRhdGFDaGVja2luZ1RyYWluaW5nKVxuXG5zdW1tYXJ5KE1vZGVsb19SZWdyZXNpb25MaW5lYWwpXG5cbmNvZWZmPSBjb2VmKE1vZGVsb19SZWdyZXNpb25MaW5lYWwpXG5jb2VmZlxuXG5gYGAifQ== -->
+<pre class="r"><code>
+Modelo_RegresionLineal = lm(checkins ~ ., data=dataCheckingTraining)
 
-&lt;!-- rnb-output-begin eyJkYXRhIjoiRXJyb3IgaW4gdmlldyhkZikgOiBjb3VsZCBub3QgZmluZCBmdW5jdGlvbiBcXHZpZXdcXFxuIn0= --&gt;
-</code></pre>
-<p>Error in view(df) : could not find function <br />
-</p>
-<pre><code>
+summary(Modelo_RegresionLineal)
 
-
-&lt;!-- rnb-output-end --&gt;
-
-&lt;!-- rnb-chunk-end --&gt;
-
-
-&lt;!-- rnb-text-begin --&gt;
-
-# Se realiza la regresión multiple
-
-&lt;!-- rnb-text-end --&gt;
-
-
-&lt;!-- rnb-chunk-begin --&gt;
-
-
-&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxuY29lZmZcblxuYGBgXG5gYGAifQ== --&gt;
-
-```r
-```r
+coeff= coef(Modelo_RegresionLineal)
 coeff
 </code></pre>
-<pre><code>
-&lt;!-- rnb-source-end --&gt;
-
-&lt;!-- rnb-output-begin eyJkYXRhIjoiKEludGVyY2VwdCkgICAgw68uLnN0YXJzICAgaG91cm9mZGF5ICAgICB3ZWVrZW5kIFxuLTguNTYwMDM1ODcgIDIuNzk0Mjc1MTAgIDAuMDE5MzEzMjQgLTAuMTYzMDIwMjEgXG4ifQ== --&gt;
-</code></pre>
-<p>(Intercept) ï..stars hourofday weekend -8.56003587 2.79427510 0.01931324 -0.16302021</p>
-<pre><code>
-
-
-&lt;!-- rnb-output-end --&gt;
-
-&lt;!-- rnb-chunk-end --&gt;
-
-
-&lt;!-- rnb-text-begin --&gt;
-
-# Cargar datos de pruebas
-
-&lt;!-- rnb-text-end --&gt;
-
-
-&lt;!-- rnb-chunk-begin --&gt;
-
-
-&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG5kYXRhQ2hlY2tpbmdUZXN0ID0gcmVhZC5jc3YoXCJEYXRvcy9CdXNpbmVzc19BY3RpdmVMaWZlX1Rlc3QuY3N2XCIsIGhlYWRlciA9IFRSVUUsIHNlcCA9IFwiLFwiKVxuXG5gYGAifQ== --&gt;
-
-```r
-
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
+<div id="cargar-datos-de-pruebas" class="section level1">
+<h1>Cargar datos de pruebas</h1>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG5kYXRhQ2hlY2tpbmdUZXN0ID0gcmVhZC5jc3YoXCJEYXRvcy9CdXNpbmVzc19BY3RpdmVMaWZlX1Rlc3QuY3N2XCIsIGhlYWRlciA9IFRSVUUsIHNlcCA9IFwiLFwiKVxuXG5gYGAifQ== -->
+<pre class="r"><code>
 dataCheckingTest = read.csv(&quot;Datos/Business_ActiveLife_Test.csv&quot;, header = TRUE, sep = &quot;,&quot;)
 </code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
-<div id="se-realiza-la-transformación-de-dias-de-la-semana-para-validar-si-es-fin-de-semana-y-se-elimina-la-variable-de-dia" class="section level1">
+<div id="se-realiza-la-transformación-de-dias-de-la-semana-para-validar-si-es-fin-de-semana-y-se-elimina-la-variable-de-dia-1" class="section level1">
 <h1>Se realiza la transformación de dias de la semana para validar si es fin de semana y se elimina la variable de dia</h1>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
@@ -396,83 +321,44 @@ dataCheckingTest = dataCheckingTest[ , -c(2)]
 <h1>Se realiza las predicciones</h1>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxucHJlZGljY2lvbmVzPC1wcmVkaWN0KE1vZGVsb19SZWdyZXNpb25MaW5lYWwsIFRlc3REYXRhQ2hlY2tpbmcpXG5cbmBgYFxuYGBgIn0= -->
-<pre class="r"><code>```r
-predicciones&lt;-predict(Modelo_RegresionLineal, TestDataChecking)
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG5wcmVkaWNjaW9uZXM8LXByZWRpY3QoTW9kZWxvX1JlZ3Jlc2lvbkxpbmVhbCwgZGF0YUNoZWNraW5nVGVzdClcblxuZGZfcHJlZGljY2lvbmVzPC1kYXRhLmZyYW1lKHByZWRpY2Npb25lcylcblxuIyBBZ3JlZ2FyIGxhIGNvbHVtbmEgZGUgbG9zIGNyaW1lbmVzIHJlYWxlcyBhbCBkYXRhIGZyYW1lIGRlIGxhcyBwcmVkaWNjaW9uZXMgXG5kZl9wcmVkaWNjaW9uZXMkcmVhbDwtKGRhdGFDaGVja2luZ1Rlc3QkY2hlY2tpbnMpXG5cbmBgYCJ9 -->
+<pre class="r"><code>
+predicciones&lt;-predict(Modelo_RegresionLineal, dataCheckingTest)
+
+df_predicciones&lt;-data.frame(predicciones)
+
+# Agregar la columna de los crimenes reales al data frame de las predicciones 
+df_predicciones$real&lt;-(dataCheckingTest$checkins)
 </code></pre>
-<pre><code>
-&lt;!-- rnb-source-end --&gt;
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
+<div id="se-grafica-prediciones-vs-real" class="section level1">
+<h1>Se grafica prediciones vs real</h1>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBHcmFmaWNhciBwcmVkaWNjaW9uZXMgdnMgcmVhbFxuXG5wbG90KGRmX3ByZWRpY2Npb25lcyRwcmVkaWNjaW9uZXMsIGRmX3ByZWRpY2Npb25lcyRyZWFsLCB4bGFiPVwiUHJlZGljY2lvblwiLCB5bGFiPVwiIFJlYWxcIiwgY29sPVwiQmx1ZVwiKSArIGFibGluZSgxLDEsIGNvbD1cImdyZWVuXCIpXG5cblxuYGBgIn0= -->
+<pre class="r"><code># Graficar predicciones vs real
 
-&lt;!-- rnb-output-begin eyJkYXRhIjoiRXJyb3IgaW4gcHJlZGljdC5sbShNb2RlbG9fUmVncmVzaW9uTGluZWFsLCBUZXN0RGF0YUNoZWNraW5nKSA6IFxuICBvYmplY3QgJ1Rlc3REYXRhQ2hlY2tpbmcnIG5vdCBmb3VuZFxuIn0= --&gt;
+plot(df_predicciones$predicciones, df_predicciones$real, xlab=&quot;Prediccion&quot;, ylab=&quot; Real&quot;, col=&quot;Blue&quot;) + abline(1,1, col=&quot;green&quot;)
 </code></pre>
-<p>Error in predict.lm(Modelo_RegresionLineal, TestDataChecking) : object ‘TestDataChecking’ not found</p>
-<pre><code>
-
-
-&lt;!-- rnb-output-end --&gt;
-
-&lt;!-- rnb-chunk-end --&gt;
-
-
-&lt;!-- rnb-text-begin --&gt;
-
-# Se grafica prediciones vs real
-
-&lt;!-- rnb-text-end --&gt;
-
-
-&lt;!-- rnb-chunk-begin --&gt;
-
-
-&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxucGxvdChkZl9wcmVkaWNjaW9uZXMkcHJlZGljY2lvbmVzLCBkZl9wcmVkaWNjaW9uZXMkcmVhbCwgeGxhYj1cXFByZWRpY2Npb25cXCwgeWxhYj1cXCBSZWFsXFwsIGNvbD1cXEJsdWVcXCkgKyBhYmxpbmUoMSwxLCBjb2w9XFxncmVlblxcKVxuXG5gYGBcbmBgYCJ9 --&gt;
-
-```r
-```r
-plot(df_predicciones$predicciones, df_predicciones$real, xlab=\Prediccion\, ylab=\ Real\, col=\Blue\) + abline(1,1, col=\green\)
-</code></pre>
-<pre><code>
-&lt;!-- rnb-source-end --&gt;
-
-&lt;!-- rnb-output-begin eyJkYXRhIjoiaW50ZWdlcigwKVxuIn0= --&gt;
-</code></pre>
-<p>integer(0)</p>
-<pre><code>
-
-
-&lt;!-- rnb-output-end --&gt;
-
-&lt;!-- rnb-plot-begin --&gt;
-
-&lt;img src=&quot;data:image/png;base64,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&quot; /&gt;
-
-&lt;!-- rnb-plot-end --&gt;
-
-&lt;!-- rnb-chunk-end --&gt;
-
-
-&lt;!-- rnb-text-begin --&gt;
-
-# se obtienen los resultados del MAE y el RMSE
-
-&lt;!-- rnb-text-end --&gt;
-
-
-&lt;!-- rnb-chunk-begin --&gt;
-
-
-&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxubWFlX1IgPC0gbWFlIChwLCBhKVxuXG5gYGBcbmBgYCJ9 --&gt;
-
-```r
-```r
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
+<div id="se-obtienen-los-resultados-del-mae-y-el-rmse" class="section level1">
+<h1>se obtienen los resultados del MAE y el RMSE</h1>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucCA8LSBwcmVkaWNjaW9uZXMgICAgICAgICAgICAgICAgICBcbmEgPC0gZGF0YUNoZWNraW5nVGVzdCRjaGVja2lucyBcbm1hZV9SIDwtIG1hZSAocCwgYSlcbnJtc2VfUiA8LSBybXNlIChwLCBhKVxuVmlldyhtYWVfUilcblZpZXcocm1zZV9SKVxuYGBgIn0= -->
+<pre class="r"><code>p &lt;- predicciones                  
+a &lt;- dataCheckingTest$checkins 
 mae_R &lt;- mae (p, a)
-</code></pre>
-<pre><code>
-&lt;!-- rnb-source-end --&gt;
-
-&lt;!-- rnb-output-begin eyJkYXRhIjoiRXJyb3IgaW4gbWFlLmRlZmF1bHQocCwgYSkgOiBvYmplY3QgJ2EnIG5vdCBmb3VuZFxuIn0= --&gt;
-</code></pre>
-<p>Error in mae.default(p, a) : object ‘a’ not found ```</p>
-<!-- rnb-output-end -->
+rmse_R &lt;- rmse (p, a)
+View(mae_R)
+View(rmse_R)</code></pre>
+<!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
