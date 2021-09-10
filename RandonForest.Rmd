@@ -1,0 +1,78 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+## Cargar Librerias
+
+```{r}
+library (zoo)
+library (hydroGOF)
+library (randomForest)
+
+```
+## Cargar datos de entrenamiento con el 80% del total de muestra 
+```{r}
+getwd()
+
+setwd('C:/Users/cristian_bedoya/Documents/Estudio/Aprendizaje Maquinas/Taller Final/ProyectoR')
+
+dataCheckingTraining = read.csv("Datos/Business_ActiveLife_Training.csv",sep="," , header = TRUE)
+
+```
+# Se realiza la transformación de dias de la semana para validar si es fin de semana y se elimina la variable de dia
+```{r}
+
+dataCheckingTraining$week_day <- as.factor(dataCheckingTraining$week_day) 
+
+dataCheckingTraining$weekend <- ifelse(dataCheckingTraining$week_day == "Sat" | dataCheckingTraining$week_day == "Sun" | dataCheckingTraining$week_day == "Fri", 1, 0)
+
+dataCheckingTraining = dataCheckingTraining[ , -c(2)]
+
+```
+# Se muestra la correlacion
+```{r}
+
+df= data.frame(cor(dataCheckingTraining))
+
+```
+# Se realiza le regresion con randomforest y 100 arboles
+```{r}
+
+modelo.rf <- randomForest(checkins ~ ., data=dataCheckingTraining, ntree=100)
+
+```
+# Cargar datos de pruebas
+```{r}
+
+dataCheckingTest = read.csv("Datos/Business_ActiveLife_Test.csv", header = TRUE, sep = ",")
+
+```
+# Se realiza la transformación de dias de la semana para validar si es fin de semana y se elimina la variable de dia
+```{r}
+
+dataCheckingTest$week_day <- as.factor(dataCheckingTest$week_day) 
+
+dataCheckingTest$weekend <- ifelse(dataCheckingTest$week_day == "Sat" | dataCheckingTest$week_day == "Sun" | dataCheckingTest$week_day == "Fri", 1, 0)
+
+dataCheckingTest = dataCheckingTest[ , -c(2)]
+
+```
+# Se realiza las predicciones
+```{r}
+
+modelo.pred <- predict(modelo.rf, dataCheckingTest)
+
+dfpredicciones = data.frame(modelo.pred)
+
+dfpredicciones <- floor(dfpredicciones)
+
+dfpredicciones$real = dataCheckingTest$checkins
+
+```
+# Se obtiene rmse
+```{r}
+
+rmse_R <- rmse (dfpredicciones$modelo.pred, dfpredicciones$real)
+
+```

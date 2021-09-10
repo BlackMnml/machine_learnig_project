@@ -1,0 +1,96 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+## Cargar Librerias
+
+```{r}
+
+library(dummies)
+library (zoo)
+library (hydroGOF)
+
+
+```
+## Cargar datos de entrenamiento con el 80% del total de muestra 
+```{r}
+getwd()
+
+setwd('C:/Users/cristian_bedoya/Documents/Estudio/Aprendizaje Maquinas/Taller Final/ProyectoR')
+
+dataCheckingTraining = read.csv("Datos/Business_ActiveLife_Training.csv",sep="," , header = TRUE)
+
+```
+# Se realiza la transformación de dias de la semana para validar si es fin de semana y se elimina la variable de dia
+```{r}
+
+dataCheckingTraining$week_day <- as.factor(dataCheckingTraining$week_day) 
+
+dataCheckingTraining$weekend <- ifelse(dataCheckingTraining$week_day == "Sat" | dataCheckingTraining$week_day == "Sun" | dataCheckingTraining$week_day == "Fri", 1, 0)
+
+dataCheckingTraining = dataCheckingTraining[ , -c(2)]
+
+```
+# Se muestra la correlacion
+```{r}
+
+df= data.frame(cor(dataCheckingTraining))
+
+```
+# Se realiza la regresión multiple
+```{r}
+
+Modelo_RegresionLineal = lm(checkins ~ ., data=dataCheckingTraining)
+
+summary(Modelo_RegresionLineal)
+
+coeff= coef(Modelo_RegresionLineal)
+coeff
+
+```
+# Cargar datos de pruebas
+```{r}
+
+dataCheckingTest = read.csv("Datos/Business_ActiveLife_Test.csv", header = TRUE, sep = ",")
+
+```
+# Se realiza la transformación de dias de la semana para validar si es fin de semana y se elimina la variable de dia
+```{r}
+
+dataCheckingTest$week_day <- as.factor(dataCheckingTest$week_day) 
+
+dataCheckingTest$weekend <- ifelse(dataCheckingTest$week_day == "Sat" | dataCheckingTest$week_day == "Sun" | dataCheckingTest$week_day == "Fri", 1, 0)
+
+dataCheckingTest = dataCheckingTest[ , -c(2)]
+
+```
+# Se realiza las predicciones
+```{r}
+
+predicciones<-predict(Modelo_RegresionLineal, dataCheckingTest)
+
+df_predicciones<-data.frame(predicciones)
+
+# Agregar la columna de los crimenes reales al data frame de las predicciones 
+df_predicciones$real<-(dataCheckingTest$checkins)
+
+```
+# Se grafica prediciones vs real
+```{r}
+# Graficar predicciones vs real
+
+plot(df_predicciones$predicciones, df_predicciones$real, xlab="Prediccion", ylab=" Real", col="Blue") + abline(1,1, col="green")
+
+
+```
+# se obtienen los resultados del MAE y el RMSE
+```{r}
+p <- predicciones                  
+a <- dataCheckingTest$checkins 
+mae_R <- mae (p, a)
+rmse_R <- rmse (p, a)
+View(mae_R)
+View(rmse_R)
+```
+
